@@ -1,0 +1,19 @@
+CREATE TABLE papers (
+    id TEXT PRIMARY KEY,
+    title TEXT,
+    year INT,
+    topic INT,
+    n_citation INT
+);
+
+CREATE TABLE authors (
+    name TEXT,
+    paper_id TEXT,
+    FOREIGN KEY (paper_id) REFERENCES papers(id)
+);
+
+CREATE TABLE abstracts (
+    paper_id TEXT,
+    abstract TEXT,
+    FOREIGN KEY(paper_id) REFERENCES papers(id)
+);

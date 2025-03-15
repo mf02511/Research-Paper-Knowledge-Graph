@@ -1,0 +1,30 @@
+LOAD CSV WITH HEADERS FROM 'file:///papers.csv' AS row
+CREATE (:Paper {id: row.id});
+
+LOAD CSV WITH HEADERS FROM 'file:///authors.csv' AS row
+CREATE (:Author {name: row.name});
+
+LOAD CSV WITH HEADERS FROM 'file:///venues.csv' AS row
+CREATE (:Venue {name: row.name});
+
+CREATE INDEX paper_id_index FOR (p:Paper) ON (p.id);
+CREATE INDEX author_paper_index FOR (a:Author) ON (a.name);
+CREATE INDEX venue_paper_index FOR (v:Venue) ON (v.name);
+
+
+LOAD CSV WITH HEADERS FROM 'file:///references.csv' AS row
+MATCH (citing:Paper {id: row.paper_id})
+MATCH (cited:Paper {id: row.ref_id})
+CREATE (citing)-[:CITED]->(cited);
+
+LOAD CSV WITH HEADERS FROM 'file:///author_paper.csv' AS row
+MATCH (writer:Author {name: row.name})
+MATCH (work:Paper {id: row.paper_id})
+CREATE (writer)-[:AUTHORED]->(work);
+
+LOAD CSV WITH HEADERS FROM 'file:///venue_paper.csv' AS row
+MATCH (journal:Venue {name: row.venue})
+MATCH (paper:Paper {paper_id: row.id})
+CREATE (journal)-[:PUBLISHED]->(paper);
+
+
