@@ -12,9 +12,9 @@
 1. Create and populate SQL tables:
    	- create tables using the [schema](schema/sql_schema.txt)
    	- populate above tables with:
-     		- [papers.csv](data/papers.csv) for the papers table
-     		- [author_paper.csv](data/author_paper.csv) for the authors table
-     		- [abstracts.csv](data/abstracts.csv.zip) for the abstracts table
+     	- [papers.csv](data/papers.csv) for the papers table
+     	- [author_paper.csv](data/author_paper.csv) for the authors table
+     	- [abstracts.csv](data/abstracts.csv.zip) for the abstracts table
 1. Create nodes and edges in Neo4j:
 	- add the following files to the import directory: 
 		- [papers.csv](data/papers.csv)
